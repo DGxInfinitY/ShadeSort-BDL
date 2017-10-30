@@ -17,10 +17,11 @@
 
 #define TABLE_SIZE 512
 
-//
+//Data and Clock Pins for the Keyboard
 const int DataPin = 15;
 const int IRQpin =  14;
-
+//PS2Keyboard into keyboard
+PS2Keyboard keyboard;
 
 //record info, this is how the record gets recorded.
 struct newPuck {
@@ -60,7 +61,7 @@ void printError(EDB_Status err) {
 }
 
 //Used to create the new records with the variable, shade, size, and puckname.
-void createRecord(int shade, int size, char* puckname) {
+void createRecord(int shade, int size, char puckname[]) {
   Serial.printf("Creating Record...");
   newPuck.shade = shade;
   newPuck.size = size;
@@ -83,8 +84,7 @@ void countRecords() {
 }
 
 //Startup Stuff Begins
-void setup()
-{
+void setup()  {
     Serial.begin(9600);
     Serial.print("Starting system...");
     // create table at with starting address 0
@@ -97,9 +97,9 @@ void setup()
     //Keyboard Load
     keyboard.begin(DataPin, IRQpin);
     Serial.print("Keyboard Ready...");
-    Serial.println("DONE")
+    Serial.println("DONE");
     //Create our First Record with the Shade "A1" Size of "!2mm" and the Name of "First"
-    createRecord(A1, 12, First);
+    createRecord(A1, 12, "First");
 }
 
 void loop() {
