@@ -1,4 +1,4 @@
-/*  Project Shade Sort V0.1 Pre-Alpha Code
+/*  Project Shade Sort V0.2 Pre-Alpha Code
 //  Developers:
 //    Donovan Goodwin (DGxInfinitY): ddg2goodwin@gmail.com
 //
@@ -15,7 +15,13 @@
 #include <EEPROM.h>
 #include <PS2Keyboard.h>
 
+
+
 #define TABLE_SIZE 512
+
+#define sh "A1"
+#define si "12"
+#define pn "First"
 
 //Data and Clock Pins for the Keyboard
 const int DataPin = 15;
@@ -25,9 +31,9 @@ PS2Keyboard keyboard;
 
 //record info, this is how the record gets recorded.
 struct newPuck {
-  int shade;
-  int size;
-  int puckname;
+  const char* shade;
+  const char* size;
+  const char* puckname;
 }
 newPuck;
 
@@ -61,7 +67,7 @@ void printError(EDB_Status err) {
 }
 
 //Used to create the new records with the variable, shade, size, and puckname.
-void createRecord(int shade, int size, char puckname[]) {
+void createRecord(const char* shade, const char* size, const char* puckname) {
   Serial.printf("Creating Record...");
   newPuck.shade = shade;
   newPuck.size = size;
@@ -99,7 +105,7 @@ void setup()  {
     Serial.print("Keyboard Ready...");
     Serial.println("DONE");
     //Create our First Record with the Shade "A1" Size of "!2mm" and the Name of "First"
-    createRecord(A1, 12, "First");
+    createRecord(sh, si, pn);
 }
 
 void loop() {
