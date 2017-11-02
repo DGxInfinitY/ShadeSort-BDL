@@ -46,12 +46,12 @@ void setup() {
 
 
 
-void loop(void) {
-  testText();
+void loop() {
+  splashscreen();
 }
 
 
-unsigned long testText() {
+unsigned long splashscreen() {
   unsigned long start = micros();
   tft.setCursor(2, 0);
   tft.setTextColor(HX8357_YELLOW);
